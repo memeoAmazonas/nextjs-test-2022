@@ -1,7 +1,7 @@
 import { Paper } from "@mui/material";
 import OnNavigate from "hooks/onNavigate";
 
-function HomeButton({ label, to }) {
+export default function HomeButton({ label, to }) {
     const { onSend } = OnNavigate(label, to);
     return (
         <Paper
@@ -30,4 +30,3 @@ function HomeButton({ label, to }) {
     );
 }
 
-export default HomeButton;

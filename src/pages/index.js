@@ -14,7 +14,7 @@ export default function App() {
             justifyContent="center"
             alignItems="center"
           >
-            {ROUTES.map((it) => (<HomeButton key={it.label} {...it} />))}
+            {ROUTES.slice(1).map((it) => (<HomeButton key={it.label} {...it} />))}
           </Stack>
         </PageContainer>
       </main>

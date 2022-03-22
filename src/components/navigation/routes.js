@@ -9,11 +9,15 @@ const ROUTES = [
     },
     {
         label: 'stories',
-        to: '/stories',
+        to: '/story',
     },
     {
         label: 'Jobs',
-        to: '/jobs',
+        to: '/job',
     },
+    {
+        label: 'pools',
+        to: '/pool',
+    }
 ];
 export default ROUTES;
