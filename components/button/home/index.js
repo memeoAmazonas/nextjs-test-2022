@@ -1,12 +1,13 @@
 import { Paper } from "@mui/material";
+import OnNavigate from "hooks/onNavigate";
 import { useRouter } from 'next/router';
 
 function HomeButton({ label, to }) {
-    const router = useRouter()
+    const { onSend } = OnNavigate(label, to);
     return (
         <Paper
             component="button" 
-            onClick={()=>router.push(to)} 
+            onClick={onSend} 
             elevation={3} 
             sx={{ 
                 bgcolor: (t) => t.palette.primary.main,
