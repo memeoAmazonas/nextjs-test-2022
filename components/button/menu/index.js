@@ -1,27 +1,25 @@
 import { MenuItem } from "@mui/material";
+import OnNavigate from "hooks/onNavigate";
 import Link from "next/link";
 
 export default function MenuButton({label, to}) {
+    const { onSend } = OnNavigate(label, to);
     return (
-        <MenuItem sx={{
-            a: {
-                textDecoration: 'none',
-                color: (t) => t.palette.primary.main,
-
-            },
+        <MenuItem 
+        onClick={onSend}
+        sx={{
             mr: 2,
+            minWidth: 100,
+            justifyContent: 'center',
+            color: (t) => t.palette.primary.main,
             border: (t) => `1px solid ${t.palette.primary.main}`,
             '&:hover': {
                 bgcolor: (t) => t.palette.primary.main,
-                a: {
                     color: (t) => t.palette.common.white,
-                }
             }
 
         }}>
-            <Link href={to}>
-                {label}
-            </Link>
+              { label }  
         </MenuItem>
     );
 }

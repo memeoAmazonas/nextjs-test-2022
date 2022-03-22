@@ -7,7 +7,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import theme from '../theme';
 import createEmotionCache from '../theme/emotionCache';
-
+import { Provider } from 'react-redux';
+import store from 'store';
 const clientSideEmotionCache = createEmotionCache();
 
 function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
@@ -27,7 +28,9 @@ function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache }) 
                 }
 
                 <CssBaseline />
+                <Provider store={store}>
                 <Component {...pageProps} />
+                </Provider>
             </ThemeProvider >
         </CacheProvider>
     );
