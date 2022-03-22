@@ -1,6 +1,5 @@
 import { MenuItem } from "@mui/material";
 import OnNavigate from "hooks/onNavigate";
-import Link from "next/link";
 
 export default function MenuButton({label, to}) {
     const { onSend } = OnNavigate(label, to);

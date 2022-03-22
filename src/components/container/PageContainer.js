@@ -1,13 +1,11 @@
-import { Box, Container, MenuItem, Paper, Stack, Toolbar } from "@mui/material";
+import { Box, Container, Paper } from "@mui/material";
 import Head from 'next/head';
 
 import Header from "components/navigation";
-import Link from "next/link"
 import { useSelector } from "react-redux";
 
 export default function PageContainer({ children, isNav = true }) {
     const { active } = useSelector((t)=>t.header);
-    console.log('active',active);
     return (
         <Box sx={{ bgcolor: (t) => t.palette.common.white }}>
             <Container

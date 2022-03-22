@@ -1,6 +1,5 @@
 import { Paper } from "@mui/material";
 import OnNavigate from "hooks/onNavigate";
-import { useRouter } from 'next/router';
 
 function HomeButton({ label, to }) {
     const { onSend } = OnNavigate(label, to);

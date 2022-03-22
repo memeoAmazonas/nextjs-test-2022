@@ -1,4 +1,4 @@
-const { PageContainer } = require("components");
+import { PageContainer } from "components";
 
 const Jobs = () => (
     <PageContainer>
