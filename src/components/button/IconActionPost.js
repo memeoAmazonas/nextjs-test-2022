@@ -1,8 +1,8 @@
 import { IconButton, Typography } from "@mui/material";
 const CustomIconButton = ({ icon, title, onclick }) => (
-    <IconButton color="primary" sx={{ borderRadius: 0, minWidth: '25%' }}>
+    <IconButton color="primary" sx={{ borderRadius: 0, minWidth: '31%' }}>
         {icon}
-        <Typography>{title}</Typography>
+        <Typography sx={{ ml: 0.3}}>{title}</Typography>
     </IconButton >
 );
 
