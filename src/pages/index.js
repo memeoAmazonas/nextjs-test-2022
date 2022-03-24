@@ -1,23 +1,18 @@
-import { HomeButton, PageContainer } from 'components';
-import { Stack } from "@mui/material";
-import ROUTES from 'components/navigation/routes';
+import { Container, Grid, Toolbar, Box } from "@mui/material";
+import { Card, Header } from "components";
 
 export default function App() {
   return (
-    <>
-      <main>
-        <PageContainer isNav={false}>
-          <Stack
-            spacing={12}
-            sx={{ minHeight: '90vh' }}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            {ROUTES.slice(1).map((it) => (<HomeButton key={it.label} {...it} />))}
-          </Stack>
-        </PageContainer>
-      </main>
-    </>
+    <Box sx={{ flexGrow: 1 }}>
+      <Header />
+      <Container color="secondary" sx={{pt: 6, bgcolor: (t)=>t.palette.primary.main}} maxWidth="sm">
+        <Grid sx={{ minHeight: 'calc(100vh - 80px)', pt:2, pb:2 }} container>
+          <Grid item xs={12}>
+            <Card />
+            <Card />
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
 }

@@ -1,4 +1,3 @@
-export { default as PageContainer } from './container/PageContainer';
-export { default as MenuButton } from './button/menu';
-export { default as HomeButton } from './button/home';
-export { default as PostContainer } from './container/PostContainer';
+export { default as Card } from './Card';
+export { default as Header } from './Header';
+export { default as IconButton } from './button/IconActionPost';
