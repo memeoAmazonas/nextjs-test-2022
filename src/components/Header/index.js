@@ -8,6 +8,8 @@ import { styled, alpha } from '@mui/material/styles';
 
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import logo from '../../../public/logo.jpeg';
+import {useSelector} from "react-redux";
+import {HTTP_STATUS} from "../../constant";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -63,23 +65,32 @@ function ElevationScroll(props) {
         elevation: trigger ? 4 : 0,
     });
 }
-const Header = ({ props }) => (
-    <ElevationScroll {...props}>
-        <AppBar sx={{ height: 60 }} color="secondary">
-            <Toolbar>
-                <Image src={logo} alt="logo" layout="fixed" width={40} height={40} className="rounded-full"
-                    quality={100}/>
-                <Search>
-                    <SearchIconWrapper>
-                        <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{ 'aria-label': 'search' }}
-                    />
-                </Search>
-            </Toolbar>
-        </AppBar>
-    </ElevationScroll>
-);
+const Header = ({ props }) => {
+    const[value, setValue] =React.useState('');
+    const { loading } = useSelector((s)=>s.post)
+
+    return(
+        <ElevationScroll {...props}>
+            <AppBar sx={{ height: 60 }} color="secondary">
+                <Toolbar>
+                    <Image src={logo} alt="logo" layout="fixed" width={40} height={40} className="rounded-full"
+                           quality={100}/>
+                    <Search>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            value={value}
+
+                            disabled = {loading === HTTP_STATUS.PENDING}
+                            onChange={(e)=>setValue(e.target.value)}
+                            placeholder="Search…"
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </Search>
+                </Toolbar>
+            </AppBar>
+        </ElevationScroll>
+    );
+}
 export default Header;
