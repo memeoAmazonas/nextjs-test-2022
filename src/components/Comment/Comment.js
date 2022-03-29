@@ -1,6 +1,6 @@
 import { Paper, Stack, Typography } from "@mui/material";
 import { Avatar } from "components";
-const Comment = ({ name = 'hola', body = 'bosy'}) => {
+const Comment = ({ name = '', body = ''}) => {
     return (
         <Stack direction="row" spacing={1} sx={{mb:2}}>
             <Avatar name={name} />

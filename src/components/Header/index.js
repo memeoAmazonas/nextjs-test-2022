@@ -3,13 +3,18 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Image from 'next/image'
 import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import logo from '../../../public/logo.jpeg';
-import {useSelector} from "react-redux";
-import {HTTP_STATUS} from "../../constant";
+import {useDispatch, useSelector} from "react-redux";
+import {HTTP_STATUS} from "constant";
+import Input from "components/Input";
+import IconButton from "components/Button/IconActionPost";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Link from "@mui/material/Link";
+import {useRouter} from "next/router";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -37,22 +42,6 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
-}));
 function ElevationScroll(props) {
     const { children, window } = props;
     const trigger = useScrollTrigger({
@@ -65,29 +54,43 @@ function ElevationScroll(props) {
         elevation: trigger ? 4 : 0,
     });
 }
-const Header = ({ props }) => {
+const Header = ({ props, login }) => {
+    const router = useRouter();
     const[value, setValue] =React.useState('');
     const { loading } = useSelector((s)=>s.post)
-
+    const { name } = useSelector((s) => s.user)
     return(
         <ElevationScroll {...props}>
             <AppBar sx={{ height: 60 }} color="secondary">
-                <Toolbar>
+                <Toolbar sx={{display: 'flex'}}>
                     <Image src={logo} alt="logo" layout="fixed" width={40} height={40} className="rounded-full"
                            quality={100}/>
-                    <Search>
+                           <Typography variant="h5" sx={{ pl:1, pr:1, color:(t) =>t.palette.common.white}}>Marawaka</Typography>
+                    {!login && <Search>
                         <SearchIconWrapper>
-                            <SearchIcon />
+                            <SearchIcon/>
                         </SearchIconWrapper>
-                        <StyledInputBase
+                        <Input
                             value={value}
-
-                            disabled = {loading === HTTP_STATUS.PENDING}
-                            onChange={(e)=>setValue(e.target.value)}
+                            disabled={loading === HTTP_STATUS.PENDING}
+                            onChange={(e) => setValue(e.target.value)}
                             placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
+                            inputProps={{'aria-label': 'search'}}
                         />
                     </Search>
+                    }
+                    {name && <Stack  direction="row" sx={{flexGrow: 1}} alignItems="center" justifyContent="flex-end">
+                        <Typography variant="h6" sx={{pl: 1, pr: 1, color: (t) => t.palette.common.white}}>
+                            {name}
+                        </Typography>
+                        <Link
+                            component="button"
+                            variant="body2"
+                            sx={{ color: (t) => t.palette.common.black }}
+                            onClick={()=>router.push("/")}
+                        >Logout</Link>
+                    </Stack>
+                    }
                 </Toolbar>
             </AppBar>
         </ElevationScroll>

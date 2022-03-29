@@ -26,6 +26,7 @@ const commentSlice = createSlice({
         [fetchComments.fulfilled](state, { payload }) {
             state.loading = HTTP_STATUS.FULFILLED
             state.comments =  { ...state.comments, ...payload }
+            console.log(state.comments, payload)
         },
         [fetchComments.rejected](state) {
             state.loading = HTTP_STATUS.REJECTED;

@@ -1,6 +1,10 @@
 export { default as Avatar } from './Avatar';
 export { default as Card } from './Card';
+export { default as LoadingCard } from './Card/loading';
 export { default as Comment } from './Comment/Comment';
+export { default as Content } from  './Content';
+export {default as LoadingComment } from './Comment/Loading';
 export { default as CreateComment } from './Comment/Create';
 export { default as Header } from './Header';
-export { default as IconButton } from './button/IconActionPost';
+export { default as IconButton } from './Button/IconActionPost';
+export { default as Input } from './Input';
