@@ -10,11 +10,11 @@ import logo from '../../../public/logo.jpeg';
 import {useDispatch, useSelector} from "react-redux";
 import {HTTP_STATUS} from "constant";
 import Input from "components/Input";
-import IconButton from "components/Button/IconActionPost";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import {useRouter} from "next/router";
+import {setSession} from "store/slice/user";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -59,6 +59,11 @@ const Header = ({ props, login }) => {
     const[value, setValue] =React.useState('');
     const { loading } = useSelector((s)=>s.post)
     const { name } = useSelector((s) => s.user)
+    const dispatch = useDispatch();
+    const logout =() => {
+        dispatch(setSession(''))
+        router.push("/");
+    }
     return(
         <ElevationScroll {...props}>
             <AppBar sx={{ height: 60 }} color="secondary">
@@ -87,7 +92,7 @@ const Header = ({ props, login }) => {
                             component="button"
                             variant="body2"
                             sx={{ color: (t) => t.palette.common.black }}
-                            onClick={()=>router.push("/")}
+                            onClick={logout}
                         >Logout</Link>
                     </Stack>
                     }
