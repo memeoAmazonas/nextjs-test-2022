@@ -1,16 +1,28 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getPost} from "pages/api/post";
+import {CreatePost, getPost} from "pages/api/post";
 import {HTTP_STATUS} from "constant";
+
+const NAMESPACE = "post";
+
 export const fetchPost = createAsyncThunk(
-    'post/fetchPost',
+    `${NAMESPACE}/fetchPost`,
     async () =>{
         return await getPost()
+    }
+)
+export const createPost = createAsyncThunk(
+    `${NAMESPACE}/createPost`,
+    async (input) =>{
+         const data = await CreatePost(input)
+        return data.CreatePost
     }
 )
 
 const initialState = {
     post: null,
     loading: null,
+    loadingCreate: null,
+    created: null
 }
 const postSlice = createSlice({
     name: 'post',
@@ -30,6 +42,17 @@ const postSlice = createSlice({
         },
         [fetchPost.rejected](state) {
             state.loading = HTTP_STATUS.REJECTED;
+        },
+
+        [createPost.pending](state){
+            state.loadingCreate = HTTP_STATUS.PENDING
+        },
+        [createPost.fulfilled](state, { payload }) {
+            state.loadingCreate = HTTP_STATUS.FULFILLED
+            state.created = payload
+        },
+        [createPost.rejected](state) {
+            state.loadingCreate = HTTP_STATUS.REJECTED;
         },
 
     }

@@ -6,22 +6,31 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import {useRouter} from 'next/router'
-import {useDispatch} from "react-redux";
-import {setSession} from "../store/slice/user";
+import {useDispatch, useSelector} from "react-redux";
+import {createUser, setSession} from "../store/slice/user";
+import {HTTP_STATUS} from "../constant";
 
 export default function App() {
     const router = useRouter();
     const dispatch = useDispatch();
     const [name, setName] = React.useState('');
+    const {loading} = useSelector((s) => s.user);
+
+    React.useEffect(() => {
+        if (loading === HTTP_STATUS.FULFILLED) {
+            dispatch(setSession(name));
+            router.push('/home')
+        }
+    }, [loading])
     const onSend = () => {
-        dispatch(setSession(name))
-        router.push('/home');
+        dispatch(createUser({name, email: ""}))
     }
     const onKeyPress = (e) => {
         if (e.code === "Enter") {
             onSend();
         }
     }
+
     return (
         <Content>
             <Stack className="content-login" sx={{minHeight: '90vh'}}>

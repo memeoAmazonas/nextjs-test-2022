@@ -28,3 +28,25 @@ export const getPost = async () => {
         }
     }
 }
+
+const ADD_POST = gql`query ($input: NewPost!){
+    CreatePost(input: $input)
+}`
+export const CreatePost = async (input) => {
+    try {
+        const {data} = await client.query({
+            query: ADD_POST,
+            variables: {
+                input,
+            }
+        });
+        return data
+    } catch (e) {
+        console.log("error", e)
+        return {
+            props: {
+                data: "error: " + e.message,
+            }
+        }
+    }
+}

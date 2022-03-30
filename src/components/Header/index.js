@@ -15,6 +15,7 @@ import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import {useRouter} from "next/router";
 import {setSession} from "store/slice/user";
+import Avatar from "components/Avatar";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -70,7 +71,7 @@ const Header = ({ props, login }) => {
                 <Toolbar sx={{display: 'flex'}}>
                     <Image src={logo} alt="logo" layout="fixed" width={40} height={40} className="rounded-full"
                            quality={100}/>
-                           <Typography variant="h5" sx={{ pl:1, pr:1, color:(t) =>t.palette.common.white}}>Marawaka</Typography>
+                    { login && <Typography variant="h5" sx={{ pl:1, pr:1, color:(t) =>t.palette.common.white}}>Marawaka</Typography> }
                     {!login && <Search>
                         <SearchIconWrapper>
                             <SearchIcon/>
@@ -85,6 +86,7 @@ const Header = ({ props, login }) => {
                     </Search>
                     }
                     {name && <Stack  direction="row" sx={{flexGrow: 1}} alignItems="center" justifyContent="flex-end">
+                        <Avatar name={name} />
                         <Typography variant="h6" sx={{pl: 1, pr: 1, color: (t) => t.palette.common.white}}>
                             {name}
                         </Typography>
