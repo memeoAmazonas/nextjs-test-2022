@@ -23,3 +23,28 @@ export const CreateUser = async (input) => {
     }
 }
 
+const LOGIN = gql`query ($email: String!){
+    GetUserByEmail(email: $email){
+        name
+        id
+    }
+}`
+export const onLogin =  async (email) => {
+    try {
+        const {data} = await client.query({
+            query: LOGIN,
+            variables: {
+                email,
+            }
+        });
+        return data
+    } catch (e) {
+        console.log("error", e)
+        return {
+            props: {
+                data: "error: " + e.message,
+            }
+        }
+    }
+}
+

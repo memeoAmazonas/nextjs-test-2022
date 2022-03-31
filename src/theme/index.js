@@ -11,7 +11,7 @@ const theme = createTheme({
             main: 'rgb(109 145 52)',
         },
         bgView: {
-            main: '#00000080'
+            main: '#f0f2f5'
         },
 
         error: {

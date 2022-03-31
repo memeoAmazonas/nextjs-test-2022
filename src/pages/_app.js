@@ -24,20 +24,16 @@ function MyApp({Component, pageProps, emotionCache = clientSideEmotionCache}) {
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                <Provider store={store}>
-                    <ApolloProvider client={client}>
+
+                <ApolloProvider client={client}>
+                    <Provider store={store}>
                         <Component {...pageProps} />
-                    </ApolloProvider>
-                </Provider>
+                    </Provider>
+                </ApolloProvider>
+
             </ThemeProvider>
         </CacheProvider>
     );
-}
-
-MyApp.PropTypes = {
-    Component: PropTypes.elementType.isRequired,
-    emotionCache: PropTypes.object,
-    pageProps: PropTypes.object.isRequired,
 }
 
 export default MyApp

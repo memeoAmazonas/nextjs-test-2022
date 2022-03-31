@@ -8,3 +8,5 @@ export { default as CreateComment } from './Comment/Create';
 export { default as Header } from './Header';
 export { default as IconButton } from './Button/IconActionPost';
 export { default as Input } from './Input';
+export { default as Toast } from './Toast';
+export { default as Link } from "./Button/Link";

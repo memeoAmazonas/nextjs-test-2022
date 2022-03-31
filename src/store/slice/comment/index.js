@@ -35,7 +35,6 @@ const commentSlice = createSlice({
         },
         [fetchComments.fulfilled](state, { payload }) {
             state.loading = HTTP_STATUS.FULFILLED
-            console.log({ ...state.comments, ...payload })
             state.comments =  { ...state.comments, ...payload }
         },
         [fetchComments.rejected](state) {
@@ -43,10 +42,7 @@ const commentSlice = createSlice({
         },
 
         [createComment.pending](state) {
-
             state.create = HTTP_STATUS.PENDING
-
-
         },
         [createComment.fulfilled](state) {
             state.create = HTTP_STATUS.FULFILLED
@@ -57,7 +53,6 @@ const commentSlice = createSlice({
     },
     reducers: {
         setComment: (state, {payload}) => {
-            console.log(state.comments)
             state.comments = {...state.comments, ...payload }
         }
     },

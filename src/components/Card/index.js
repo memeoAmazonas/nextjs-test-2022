@@ -1,5 +1,6 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
+import { v4 as uuidv4 } from 'uuid';
 
 import {Card, Stack, Typography, Link, Divider, CardHeader, CardContent} from "@mui/material";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -19,6 +20,7 @@ const CustomCard = ({name, inOpen, id, title = "", author = "", numberComents = 
         }
     })
     const onOpenComment = () => {
+        console.log(id);
         setOpen(!open);
         onOpen(id)
     }
@@ -26,7 +28,7 @@ const CustomCard = ({name, inOpen, id, title = "", author = "", numberComents = 
         setFocus(!focus)
     }
     return (
-        <Card elevation={2} sx={{minHeight: 120, p: 0, mb: 1.6}}>
+        <Card elevation={2} sx={{minHeight: 120, p: 0, mb: 1.6, bgcolor:(t)=>t.palette.bgView.main}}>
             <CardHeader
                 avatar={
                     <Avatar sx={{bgcolor: (t) => t.palette.primary.main}} name={author}/>
@@ -72,7 +74,7 @@ const CustomCard = ({name, inOpen, id, title = "", author = "", numberComents = 
             </CardContent>
             }
             {open && comments.length === 0 && loading === HTTP_STATUS.PENDING
-            && Array.from(Array(numberComents).keys()).map((i)=>(<LoadingComment key={`loading-${i}`} />))}
+            && Array.from(Array(numberComents).keys()).map((i)=>(<LoadingComment key={uuidv4()} />))}
             <Stack sx={{p: 2}} direction="row" spacing={1}>
                 <Avatar name={name} />
                 <CreateComment onCreate={(value)=>onCreateComment(value, id)} focus={focus} />
